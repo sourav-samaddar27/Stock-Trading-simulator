@@ -1,0 +1,98 @@
+2025-07-21 22:38:57.565871+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE IF NOT EXISTS Users(id INT AUTO_INCREMENT PRIMARY KEY,users VARCHAR(255) NOT NULL [*]UNIQUEpassword_hash VARCHAR(255) NOT NULLbalance DECIMAL(19,4) NOT NULL)"; expected "DEFAULT, GENERATED, ON UPDATE, DEFAULT ON NULL, SEQUENCE, SELECTIVITY, COMMENT, CONSTRAINT, COMMENT, PRIMARY KEY, UNIQUE, NOT NULL, CHECK, REFERENCES, ,, )"; SQL statement:
+CREATE TABLE IF NOT EXISTS Users(id INT AUTO_INCREMENT PRIMARY KEY,users VARCHAR(255) NOT NULL UNIQUEpassword_hash VARCHAR(255) NOT NULLbalance DECIMAL(19,4) NOT NULL) [42001-232]
+2025-07-22 13:37:25.872379+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE IF NOT EXISTS Users(id INT AUTO_INCREMENT PRIMARY KEY,users VARCHAR(255) NOT NULL [*]UNIQUEpassword_hash VARCHAR(255) NOT NULLbalance DECIMAL(19,4) NOT NULL)"; expected "DEFAULT, GENERATED, ON UPDATE, DEFAULT ON NULL, SEQUENCE, SELECTIVITY, COMMENT, CONSTRAINT, COMMENT, PRIMARY KEY, UNIQUE, NOT NULL, CHECK, REFERENCES, ,, )"; SQL statement:
+CREATE TABLE IF NOT EXISTS Users(id INT AUTO_INCREMENT PRIMARY KEY,users VARCHAR(255) NOT NULL UNIQUEpassword_hash VARCHAR(255) NOT NULLbalance DECIMAL(19,4) NOT NULL) [42001-232]
+2025-07-22 13:41:08.630247+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE IF NOT EXISTS Stocks(id INT AUTO_INCREMENT PRIMARY KEY,symbol VARCHAR(255) NOT NULL [*]UNIQUEcompany_name VARCHAR(255) NOT NULLcurrent_price(19,4) NOT NULL)"; expected "DEFAULT, GENERATED, ON UPDATE, DEFAULT ON NULL, SEQUENCE, SELECTIVITY, COMMENT, CONSTRAINT, COMMENT, PRIMARY KEY, UNIQUE, NOT NULL, CHECK, REFERENCES, ,, )"; SQL statement:
+CREATE TABLE IF NOT EXISTS Stocks(id INT AUTO_INCREMENT PRIMARY KEY,symbol VARCHAR(255) NOT NULL UNIQUEcompany_name VARCHAR(255) NOT NULLcurrent_price(19,4) NOT NULL) [42001-232]
+2025-07-22 13:42:27.371682+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE IF NOT EXISTS Orders(id INT AUTO_INCREMENT PRIMARY KEY,user_id INT NOT NULL,stock_id INT NOT NULL,order_type VARCHAR(4) NOT NULL,price DECIMAL(19,4) NOT NULL,quantity INT NOT NULL,status VARCHAR(20) NOT NULL,timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,FOREIGN KEY (user_id) REFERENCES Users(id)[*]FOREIGN KEY (stock_id) REFERENCES Stocks(id))"; expected "INDEX, ON, NOT DEFERRABLE, DEFERRABLE, NOCHECK, CHECK, ,, )"; SQL statement:
+CREATE TABLE IF NOT EXISTS Orders(id INT AUTO_INCREMENT PRIMARY KEY,user_id INT NOT NULL,stock_id INT NOT NULL,order_type VARCHAR(4) NOT NULL,price DECIMAL(19,4) NOT NULL,quantity INT NOT NULL,status VARCHAR(20) NOT NULL,timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,FOREIGN KEY (user_id) REFERENCES Users(id)FOREIGN KEY (stock_id) REFERENCES Stocks(id)) [42001-232]
+2025-07-22 13:42:49.356466+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "CREATE TABLE IF NOT EXISTS Transactions(id INT AUTO_INCREMENT PRIMARY KEY,buyer_user_id INT NOT NULL,seller_user_id INT NOT NULL,stock_id INT NOT NULL,price DECIMAL(19,4) NOT NULL,quantity INT NOT NULL,timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,FOREIGN KEY (buyer_user_id) REFERENCES Users(id)[*]FOREIGN KEY (seller_user_id) REFERENCES Users(id)FOREIGN KEY (stock_id) REFERENCES Stocks(id))"; expected "INDEX, ON, NOT DEFERRABLE, DEFERRABLE, NOCHECK, CHECK, ,, )"; SQL statement:
+CREATE TABLE IF NOT EXISTS Transactions(id INT AUTO_INCREMENT PRIMARY KEY,buyer_user_id INT NOT NULL,seller_user_id INT NOT NULL,stock_id INT NOT NULL,price DECIMAL(19,4) NOT NULL,quantity INT NOT NULL,timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,FOREIGN KEY (buyer_user_id) REFERENCES Users(id)FOREIGN KEY (seller_user_id) REFERENCES Users(id)FOREIGN KEY (stock_id) REFERENCES Stocks(id)) [42001-232]
+2025-07-22 13:44:22.116008+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Column "USER_ID" not found; SQL statement:
+CREATE TABLE IF NOT EXISTS portfolios (user_is INT NOT NULL,stock_id INT NOT NULL,quantity INT NOT NULL,PRIMARY KEY (user_id,stock_id),FOREIGN KEY (user_id) REFERENCES Users(id),FOREIGN KEY (stock_id) REFERENCES Stocks(id)) [42122-232]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:514)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:489)
+	at org.h2.message.DbException.get(DbException.java:223)
+	at org.h2.message.DbException.get(DbException.java:199)
+	at org.h2.table.Table.getColumn(Table.java:786)
+	at org.h2.table.IndexColumn.mapColumns(IndexColumn.java:184)
+	at org.h2.command.ddl.AlterTableAddConstraint.tryUpdate(AlterTableAddConstraint.java:121)
+	at org.h2.command.ddl.AlterTableAddConstraint.update(AlterTableAddConstraint.java:74)
+	at org.h2.command.ddl.AlterTable.update(AlterTable.java:46)
+	at org.h2.command.ddl.CommandWithColumns.createConstraints(CommandWithColumns.java:83)
+	at org.h2.command.ddl.CreateTable.update(CreateTable.java:134)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:139)
+	at org.h2.command.Command.executeUpdate(Command.java:304)
+	at org.h2.command.Command.executeUpdate(Command.java:248)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:262)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:231)
+	at com.example.stocks.DatabaseManager.initializeDatabase(DatabaseManager.java:75)
+	at com.example.stocks.MainApplication.initializeApplication(MainApplication.java:31)
+	at com.example.stocks.MainApplication.<init>(MainApplication.java:24)
+	at java.desktop/java.awt.event.InvocationEvent.dispatch(InvocationEvent.java:318)
+	at java.desktop/java.awt.EventQueue.dispatchEventImpl(EventQueue.java:773)
+	at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:720)
+	at java.desktop/java.awt.EventQueue$4.run(EventQueue.java:714)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:399)
+	at java.base/java.security.ProtectionDomain$JavaSecurityAccessImpl.doIntersectionPrivilege(ProtectionDomain.java:86)
+	at java.desktop/java.awt.EventQueue.dispatchEvent(EventQueue.java:742)
+	at java.desktop/java.awt.EventDispatchThread.pumpOneEventForFilters(EventDispatchThread.java:203)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForFilter(EventDispatchThread.java:124)
+	at java.desktop/java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:113)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:109)
+	at java.desktop/java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:101)
+	at java.desktop/java.awt.EventDispatchThread.run(EventDispatchThread.java:90)
+2025-07-22 13:45:11.706779+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ORDERSWHERE" not found; SQL statement:
+SELECT id, user_id, stock_id, order_type,price,quantity,status,timestamp FROM OrdersWHERE stock_id=? AND order_type=? AND status=? ORDER BY price DESC [42102-232]
+2025-07-22 13:45:13.639325+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT id, symbol, company_name,current_price FROM Stocks WHERE Stocks [*]WHERE id=?"; SQL statement:
+SELECT id, symbol, company_name,current_price FROM Stocks WHERE Stocks WHERE id=? [42000-232]
+2025-07-22 13:45:14.662977+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ORDERSWHERE" not found; SQL statement:
+SELECT id, user_id, stock_id, order_type,price,quantity,status,timestamp FROM OrdersWHERE stock_id=? AND order_type=? AND status=? ORDER BY price DESC [42102-232]
+2025-07-22 13:45:17.642363+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ORDERSWHERE" not found; SQL statement:
+SELECT id, user_id, stock_id, order_type,price,quantity,status,timestamp FROM OrdersWHERE stock_id=? AND order_type=? AND status=? ORDER BY price DESC [42102-232]
+2025-07-22 13:45:18.638951+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT id, symbol, company_name,current_price FROM Stocks WHERE Stocks [*]WHERE id=?"; SQL statement:
+SELECT id, symbol, company_name,current_price FROM Stocks WHERE Stocks WHERE id=? [42000-232]
+2025-07-22 13:45:20.623776+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ORDERSWHERE" not found; SQL statement:
+SELECT id, user_id, stock_id, order_type,price,quantity,status,timestamp FROM OrdersWHERE stock_id=? AND order_type=? AND status=? ORDER BY price DESC [42102-232]
+2025-07-22 13:45:23.703407+05:30 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ORDERSWHERE" not found; SQL statement:
+SELECT id, user_id, stock_id, order_type,price,quantity,status,timestamp FROM OrdersWHERE stock_id=? AND order_type=? AND status=? ORDER BY price DESC [42102-232]
+2025-07-22 13:45:23.703641+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT id, symbol, company_name,current_price FROM Stocks WHERE Stocks [*]WHERE id=?"; SQL statement:
+SELECT id, symbol, company_name,current_price FROM Stocks WHERE Stocks WHERE id=? [42000-232]
+2025-07-22 13:45:26.650246+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ORDERSWHERE" not found; SQL statement:
+SELECT id, user_id, stock_id, order_type,price,quantity,status,timestamp FROM OrdersWHERE stock_id=? AND order_type=? AND status=? ORDER BY price DESC [42102-232]
+2025-07-22 13:45:28.631693+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT id, symbol, company_name,current_price FROM Stocks WHERE Stocks [*]WHERE id=?"; SQL statement:
+SELECT id, symbol, company_name,current_price FROM Stocks WHERE Stocks WHERE id=? [42000-232]
+2025-07-22 13:45:29.620957+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ORDERSWHERE" not found; SQL statement:
+SELECT id, user_id, stock_id, order_type,price,quantity,status,timestamp FROM OrdersWHERE stock_id=? AND order_type=? AND status=? ORDER BY price DESC [42102-232]
+2025-07-22 13:45:32.644952+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ORDERSWHERE" not found; SQL statement:
+SELECT id, user_id, stock_id, order_type,price,quantity,status,timestamp FROM OrdersWHERE stock_id=? AND order_type=? AND status=? ORDER BY price DESC [42102-232]
+2025-07-22 13:45:33.630338+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT id, symbol, company_name,current_price FROM Stocks WHERE Stocks [*]WHERE id=?"; SQL statement:
+SELECT id, symbol, company_name,current_price FROM Stocks WHERE Stocks WHERE id=? [42000-232]
+2025-07-22 13:45:35.624129+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ORDERSWHERE" not found; SQL statement:
+SELECT id, user_id, stock_id, order_type,price,quantity,status,timestamp FROM OrdersWHERE stock_id=? AND order_type=? AND status=? ORDER BY price DESC [42102-232]
+2025-07-22 13:45:38.634392+05:30 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT id, symbol, company_name,current_price FROM Stocks WHERE Stocks [*]WHERE id=?"; SQL statement:
+SELECT id, symbol, company_name,current_price FROM Stocks WHERE Stocks WHERE id=? [42000-232]
+2025-07-22 13:45:38.634531+05:30 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "ORDERSWHERE" not found; SQL statement:
+SELECT id, user_id, stock_id, order_type,price,quantity,status,timestamp FROM OrdersWHERE stock_id=? AND order_type=? AND status=? ORDER BY price DESC [42102-232]
